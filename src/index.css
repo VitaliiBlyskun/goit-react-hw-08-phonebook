@@ -13,3 +13,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+ul {
+  padding:0;
+  margin:0;
+  list-style: none;
+}
+
+h1,h1,h3,h4,h5,h6,p {
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+p {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+img {
+  border: 2px solid black;
+  border-radius: 30px;
+}
