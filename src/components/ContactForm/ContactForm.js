@@ -1,13 +1,37 @@
-import { addContact } from '../../redux/contactsSlice';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { addContact } from '../../redux/contactsSlice';
+import { getContacts } from 'redux/selectors';
 import { Button, Form, Label, Input } from './ContactForm.styled';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
   const handleSubmit = event => {
     event.preventDefault();
+
     const form = event.target;
+
+    function isDublicateName() {
+      return contacts.find(
+        contact =>
+          contact.name === form.elements.name.value &&
+          contact.number === form.elements.number.value
+      );
+    }
+
+    if (isDublicateName()) {
+      return toast.warning(
+        `${form.elements.name.value} is already in contacts.`,
+        {
+          position: 'top-center',
+        }
+      );
+    }
+
     dispatch(addContact(form.elements.name.value, form.elements.number.value));
     form.reset();
   };
@@ -35,6 +59,7 @@ const ContactForm = () => {
         />
       </Label>
       <Button type="submit">Add contact</Button>
+      <ToastContainer />
     </Form>
   );
 };

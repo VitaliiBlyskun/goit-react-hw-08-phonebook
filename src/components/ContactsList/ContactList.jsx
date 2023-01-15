@@ -1,7 +1,7 @@
+import { DeleteContactButton } from 'components/DeleteContact/DeleteContact';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getContacts, getFilters } from 'redux/selectors';
-import { DeleteContactButton } from 'components/DeleteContact/DeleteContact';
 import { Initial, List } from './ContactList.styled';
 
 const ContactList = () => {
