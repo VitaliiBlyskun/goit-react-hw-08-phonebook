@@ -31,6 +31,7 @@ const contactsSlice = createSlice({
       state.items.push(action.payload);
 
       //? Не можу обєкт в payload засунути
+      
 
       //     prepare(name, number) {
       //     return {
@@ -40,6 +41,7 @@ const contactsSlice = createSlice({
       //     number,
       //   },
       // };
+
 
     },
     [addContact.rejected](state, action) {
