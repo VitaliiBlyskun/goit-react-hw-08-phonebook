@@ -1,3 +1,4 @@
+// import { createSlice, nanoid } from '@reduxjs/toolkit';
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 import { fetchContacts, addContact, deleteContact } from './operations';
 
@@ -39,7 +40,7 @@ const contactsSlice = createSlice({
       //     number,
       //   },
       // };
-      
+
     },
     [addContact.rejected](state, action) {
       state.isLoading = false;
