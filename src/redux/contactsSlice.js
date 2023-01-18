@@ -1,5 +1,5 @@
 // import { createSlice, nanoid } from '@reduxjs/toolkit';
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { fetchContacts, addContact, deleteContact } from './operations';
 
 const contactsSlice = createSlice({
