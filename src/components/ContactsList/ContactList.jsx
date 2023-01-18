@@ -16,7 +16,7 @@ const ContactList = () => {
     <List>
       {visibleContacts.map(contact => (
         <Initial key={contact.id}>
-          <p>{contact.name + ':' + contact.number}</p>
+          <p>{contact.name + ':' + contact.phone}</p>
           <DeleteContactButton contact={contact} />
         </Initial>
       ))}

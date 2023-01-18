@@ -1,8 +1,7 @@
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from 'redux/operations';
 import { getContacts } from 'redux/selectors';
 import { Button, Form, Label, Input } from './ContactForm.styled';
 
@@ -12,14 +11,13 @@ const ContactForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-
     const form = event.target;
 
     function isDublicateName() {
       return contacts.find(
         contact =>
           contact.name === form.elements.name.value &&
-          contact.number === form.elements.number.value
+          contact.phone === form.elements.phone.value
       );
     }
 
@@ -32,7 +30,7 @@ const ContactForm = () => {
       );
     }
 
-    dispatch(addContact(form.elements.name.value, form.elements.number.value));
+    dispatch(addContact(form.elements.name.value, form.elements.phone.value));
     form.reset();
   };
 
@@ -52,7 +50,7 @@ const ContactForm = () => {
         Number
         <Input
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
