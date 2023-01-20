@@ -1,12 +1,12 @@
 import { DeleteContactButton } from 'components/DeleteContact/DeleteContact';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getContacts, getFilters } from 'redux/selectors';
+import { selectContacts, selectFilters } from 'redux/selectors';
 import { Initial, List } from './ContactList.styled';
 
 const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilters);
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilters);
 
   const visibleContacts = contacts.filter(contact => {
     return contact.name.toLowerCase().includes(filter.toLowerCase());

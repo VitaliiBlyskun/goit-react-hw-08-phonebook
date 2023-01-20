@@ -2,12 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addContact } from 'redux/operations';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { Button, Form, Label, Input } from './ContactForm.styled';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -30,7 +30,10 @@ const ContactForm = () => {
       );
     }
 
-    dispatch(addContact(form.elements.name.value, form.elements.phone.value));
+    dispatch(addContact({
+      name: form.elements.name.value, 
+      phone: form.elements.phone.value,
+    }));
     form.reset();
   };
 
