@@ -1,22 +1,23 @@
 import { DeleteContactButton } from 'components/DeleteContact/DeleteContact';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { selectContacts, selectFilters } from 'redux/selectors';
+import { selectContacts } from 'redux/contacts/selectors';
+import { selectFilters } from 'redux/filter/selectors';
 import { Initial, List } from './ContactList.styled';
 
 const ContactList = () => {
   const contacts = useSelector(selectContacts);
-  const filter = useSelector(selectFilters);
+  const filteredString = useSelector(selectFilters);
 
   const visibleContacts = contacts.filter(contact => {
-    return contact.name.toLowerCase().includes(filter.toLowerCase());
+    return contact.name.toLowerCase().includes(filteredString.toLowerCase());
   });
 
   return (
     <List>
       {visibleContacts.map(contact => (
         <Initial key={contact.id}>
-          <p>{contact.name + ':' + contact.phone}</p>
+          <p>{contact.name + ' : ' + contact.number}</p>
           <DeleteContactButton contact={contact} />
         </Initial>
       ))}
@@ -35,3 +36,7 @@ ContactList.propTypes = {
     })
   ),
 };
+
+
+
+

@@ -6,6 +6,6 @@ export const Button = styled.button`
     color: ${props => props.theme.colors.primary};
     :hover,
     :focus {
-      background-color: ${props => props.theme.colors.secondary};
+      background-color: ${props => props.theme.colors.primary};
       color: ${props => props.theme.colors.black};
     }`

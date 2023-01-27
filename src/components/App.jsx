@@ -1,91 +1,58 @@
-// import { Box } from './Box';
-// import ContactForm from './ContactForm/ContactForm';
-// import ContactList from './ContactsList/ContactList';
-// import Filter from './Filter/Filter';
-
-// export const App = () => {
-//   return (
-//     <Box
-//       as="section"
-//       maxWidth="600px"
-//       width="80vw"
-//       textAlign="center"
-//       mx="auto"
-//       mt={5}
-//       pt={5}
-//       bg="white"
-//       borderRadius="normal"
-//       boxShadow="normal"
-//       overflow="hidden"
-//     >
-//       <Box>
-//         <h1>Phonebook</h1>
-//         <ContactForm />
-//       </Box>
-
-//       <Box mt={10} py={10} px={10} bg="primary">
-//         <h2>Contacts</h2>
-//         <Filter />
-//         <ContactList />
-//       </Box>
-//     </Box>
-//   );
-// };
-
-
-////////////////////////////////////////////////////////////////////////////////////////////
-
-import { useEffect } from "react";
+import { useEffect, lazy } from "react";
 // import { useDispatch, useSelector } from "react-redux";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchContacts } from "redux/operations";
-import { Box } from './Box';
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactsList/ContactList';
-import Filter from './Filter/Filter';
-import { selectError, selectIsLoading } from '../redux/selectors'
+import { useDispatch } from "react-redux";
+import { Route, Routes } from 'react-router-dom';
+import { refreshUser } from 'redux/auth/operations';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
+import { Layout } from './Layout';
+import { useAuth } from "hooks";
 
-
+const HomePage = lazy(() => import('../pages/Home'));
+const RegisterPage = lazy(() => import('../pages/Register'));
+const LoginPage = lazy(() => import('../pages/Login'));
+const ContactsPage = lazy(() => import('../pages/Contacts'));
 
 export const App = () => {
+
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-
-  // const { items, isLoading, error } = useSelector(getContacts);
-
+  const { isRefreshing } = useAuth()
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
 
-  return (
-    <Box
-      as="section"
-      maxWidth="600px"
-      width="80vw"
-      textAlign="center"
-      mx="auto"
-      mt={5}
-      pt={5}
-      bg="white"
-      borderRadius="normal"
-      boxShadow="normal"
-      overflow="hidden"
-    >
-      <Box>
-        <h1>Phonebook</h1>
-        <ContactForm />
-        {isLoading && !error && <b>Request in progress...</b>}
-      </Box>
+  return isRefreshing ? (
+    'Fetching user data ...'
+  ) : (
 
-      <Box mt={10} py={10} px={10} bg="primary">
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
-      </Box>
-    </Box>
-  );
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<RegisterPage />} />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+          }
+        />
+      </Route>
+    </Routes>
+    )
 };
 
+
+
+    

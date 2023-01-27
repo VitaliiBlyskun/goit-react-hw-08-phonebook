@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-07-phonebook",
+  "name": "goit-react-hw-08-phonebook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://VitaliiBlyskun.github.io/goit-react-hw-07-phonebook/",
+  "homepage": "https://VitaliiBlyskun.github.io/goit-react-hw-08-phonebook/",
   "dependencies": {
     "@redux-devtools/extension": "^3.2.4",
     "@reduxjs/toolkit": "^1.9.1",
@@ -14,9 +14,13 @@
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-helmet": "^6.1.0",
+    "react-hot-toast": "^2.4.0",
     "react-redux": "^8.0.5",
-    "react-scripts": "5.0.1",
+    "react-router-dom": "^6.7.0",
+    "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.1",
+    "redux-persist": "^6.0.0",
     "styled-components": "^5.3.6",
     "styled-system": "^5.1.5",
     "web-vitals": "^2.1.3"
